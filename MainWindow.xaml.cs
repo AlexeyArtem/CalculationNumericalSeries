@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using LiveCharts.Wpf;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts;
+using LiveCharts.Defaults;
 
 namespace CalculationNumericalSeries
 {
@@ -20,12 +23,123 @@ namespace CalculationNumericalSeries
     /// </summary>
     public partial class MainWindow : Window
     {
-        NumericalSeries numericalSeries;
+        private SeriesCollection partialSumSeries;
+        private SeriesCollection derivativeSeries;
+        private LineSeries partialSumLine;
+        private LineSeries derivativeLine;
+        private PromptingsWindow promptingsWindow;
+        
         public MainWindow()
         {
             InitializeComponent();
-            numericalSeries = new NumericalSeries("2*n");
-            LabelResult.Content += numericalSeries.GetSum(1, 3).ToString();
+            promptingsWindow = new PromptingsWindow();
+            CbSelectUpperLimit.SelectedIndex = 0;
+
+            partialSumSeries = new SeriesCollection();
+            partialSumLine = new LineSeries { Values = new ChartValues<ObservablePoint>(), PointGeometrySize = 0, Title = "Частичная сумма" };
+            partialSumSeries.Add(partialSumLine);
+            PartialSumsChart.Series = partialSumSeries;
+
+            derivativeSeries = new SeriesCollection();
+            derivativeLine = new LineSeries { Values = new ChartValues<ObservablePoint>(), PointGeometrySize = 0, Title = "Производная функции" };
+            derivativeSeries.Add(derivativeLine);
+            DerivativeChart.Series = derivativeSeries;
+        }
+
+        private void BtFindSolution_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NumericalSeries numericalSeries = new NumericalSeries(TbInputFunc.Text, "n");
+                SumNumericalSeries result;
+                if (UdInputUpperLimit.IsEnabled)
+                {
+                    result = numericalSeries.GetSum((int)UdInputLowerLimit.Value, (int)UdInputUpperLimit.Value);
+                }
+                else
+                {
+                    result = numericalSeries.GetSum((int)UdInputLowerLimit.Value, (double)UdAccuracy.Value);
+                }
+                LbResult.Content = result.ValueLimit.ToString();
+
+                partialSumLine.Values.Clear();
+                for (int i = 0; i < result.PointsPartialSums.Length; i++)
+                    partialSumLine.Values.Add(new ObservablePoint(result.PointsPartialSums[i].X, result.PointsPartialSums[i].Y));
+
+                derivativeLine.Values.Clear();
+                for (int i = 0; i < result.DerivativePoints.Length; i++)
+                    derivativeLine.Values.Add(new ObservablePoint(result.DerivativePoints[i].X, result.DerivativePoints[i].Y));
+            }
+            catch (Exception ex) 
+            {
+                LbResult.Content = "";
+                partialSumLine.Values.Clear();
+                derivativeLine.Values.Clear();
+
+                if (ex is NegativeMemberNumberException)
+                    MessageBox.Show(ex.Message + ".", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
+                else if (ex is NumericalSeriesNotConvergent)
+                    MessageBox.Show(ex.Message + ".", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
+                else
+                    MessageBox.Show(ex.Message + ".", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void MenuItemExamples_Click(object sender, RoutedEventArgs e)
+        {
+            ExamplesWindow examplesWindow = new ExamplesWindow();
+            if (!(bool)examplesWindow.ShowDialog()) 
+            {
+                string exampleFunc = (examplesWindow.ListExamples.SelectedItem as ListBoxItem)?.Content as string;
+                TbInputFunc.Text = exampleFunc ?? TbInputFunc.Text;
+            }
+        }
+
+        private void MenuItemСonstructor_Click(object sender, RoutedEventArgs e)
+        {
+            ConstructorWindow constructorWindow = new ConstructorWindow();
+            constructorWindow.BtAddFunction.Click += delegate (object s, RoutedEventArgs args)
+            {
+                string func = constructorWindow.TbInputFunction.Text;
+                TbInputFunc.Text = func != "" ? func : TbInputFunc.Text;
+            };
+
+            constructorWindow.ShowDialog();
+        }
+
+        private void MenuItemPrompting_Click(object sender, RoutedEventArgs e)
+        {
+            promptingsWindow?.Show();
+        }
+
+        private void BtCopy_Click(object sender, RoutedEventArgs e)
+        {
+            string result = LbResult.Content != null ? LbResult.Content.ToString() : "";
+            Clipboard.SetText(result);
+            BtCopy.Content = "Скопировано";
+        }
+
+        private void BtCopy_MouseLeave(object sender, MouseEventArgs e)
+        {
+            BtCopy.Content = "Копировать";
+        }
+
+        private void CbSelectUpperLimit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (CbSelectUpperLimit.SelectedIndex) 
+            {
+                case 0:
+                    UdInputUpperLimit.Visibility = Visibility.Collapsed;
+                    UdInputUpperLimit.IsEnabled = false;
+                    UdAccuracy.IsEnabled = true;
+                    break;
+                case 1:
+                    UdInputUpperLimit.Visibility = Visibility.Visible;
+                    UdInputUpperLimit.IsEnabled = true;
+                    CbItemUpperLimit.IsSelected = false;
+                    UdAccuracy.IsEnabled = false;
+                    break;
+            }
         }
     }
 }

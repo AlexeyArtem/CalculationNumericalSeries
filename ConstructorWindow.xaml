@@ -1,0 +1,76 @@
+﻿<Window x:Class="CalculationNumericalSeries.ConstructorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CalculationNumericalSeries"
+        mc:Ignorable="d"
+        Title="Конструктор функции" Height="277.226" Width="486.83" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="TbInputFunction" Grid.Row="0" Style="{StaticResource ResourceKey=DataInputElement}"></TextBox>
+            <Grid Grid.Row="1" Width="400" Height="120">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Grid.Column="0" x:Name="BtSquare" Click="BtSquare_Click">x²</Button>
+                <Button Grid.Row="1" Grid.Column="0" x:Name="BtAsin" Click="BtAsin_Click">asin</Button>
+                <Button Grid.Row="2" Grid.Column="0" x:Name="BtAcos" Click="BtAcos_Click">acos</Button>
+                <Button Grid.Row="3" Grid.Column="0" x:Name="BtAtan" Click="BtAtan_Click">atan</Button>
+                
+                <Button Grid.Row="0" Grid.Column="1" x:Name="BtFactorial" Click="BtFactorial_Click">x!</Button>
+                <Button Grid.Row="1" Grid.Column="1" x:Name="BtSin" Click="BtSin_Click">sin</Button>
+                <Button Grid.Row="2" Grid.Column="1" x:Name="BtCos" Click="BtCos_Click">cos</Button>
+                <Button Grid.Row="3" Grid.Column="1" x:Name="BtTan" Click="BtTan_Click">tan</Button>
+
+                <Button Grid.Row="0" Grid.Column="2" x:Name="BtFraction" Click="BtFraction_Click">1/x</Button>
+                <Button Grid.Row="1" Grid.Column="2" x:Name="BtSquareRoot" Click="BtSquareRoot_Click">√</Button>
+                <Button Grid.Row="2" Grid.Column="2" x:Name="BtNaturalLog" Click="BtNaturalLog_Click">ln</Button>
+                <Button Grid.Row="3" Grid.Column="2" x:Name="BtDecimalLog" Click="BtDecimalLog_Click">lg</Button>
+                
+                <Button Grid.Row="0" Grid.Column="3" x:Name="BtOne" Click="BtOne_Click">1</Button>
+                <Button Grid.Row="1" Grid.Column="3" x:Name="BtFoo" Click="BtFoo_Click">4</Button>
+                <Button Grid.Row="2" Grid.Column="3" x:Name="BtSeven" Click="BtSeven_Click">7</Button>
+                <Button Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" x:Name="BtZero" Click="BtZero_Click">0</Button>
+
+                <Button Grid.Row="0" Grid.Column="4" x:Name="BtTwo" Click="BtTwo_Click">2</Button>
+                <Button Grid.Row="1" Grid.Column="4" x:Name="BtFive" Click="BtFive_Click">5</Button>
+                <Button Grid.Row="2" Grid.Column="4" x:Name="BtEight" Click="BtEight_Click">8</Button>
+
+                <Button Grid.Row="0" Grid.Column="5" x:Name="BtThree" Click="BtThree_Click">3</Button>
+                <Button Grid.Row="1" Grid.Column="5" x:Name="BtSix" Click="BtSix_Click">6</Button>
+                <Button Grid.Row="2" Grid.Column="5" x:Name="BtNine" Click="BtNine_Click">9</Button>
+                <Button Grid.Row="3" Grid.Column="5" x:Name="BtComma" Click="BtComma_Click">.</Button>
+
+                <Button Grid.Row="0" Grid.Column="6" x:Name="BtClear" Click="BtClear_Click">C</Button>
+                <Button Grid.Row="1" Grid.Column="6" x:Name="BtMinus" Click="BtMinus_Click">-</Button>
+                <Button Grid.Row="2" Grid.Column="6" x:Name="BtDivision" Click="BtDivision_Click">÷</Button>
+                <Button Grid.Row="3" Grid.Column="6" x:Name="BtPi" Click="BtPi_Click">π</Button>
+
+                <Button Grid.Row="0" Grid.Column="7" x:Name="BtDel" Click="BtDel_Click">Del</Button>
+                <Button Grid.Row="1" Grid.Column="7" x:Name="BtPlus" Click="BtPlus_Click">+</Button>
+                <Button Grid.Row="2" Grid.Column="7" x:Name="BtMultiplication" Click="BtMultiplication_Click">×</Button>
+                <Button Grid.Row="3" Grid.Column="7" x:Name="BtE" Click="BtE_Click">e</Button>
+            </Grid>
+            <Button Margin="0,0,0,10" Grid.Row="2" Style="{StaticResource ResourceKey=ControlButton}" x:Name="BtAddFunction" Click="BtAddFunction_Click">Добавить</Button>
+        </Grid>
+    </Grid>
+</Window>

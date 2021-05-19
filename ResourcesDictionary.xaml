@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="ControlButton">
+        <Setter Property="Control.Width" Value="100"/>
+        <Setter Property="Control.Height" Value="30"/>
+    </Style>
+    <Style x:Key="DataInputElement">
+        <Setter Property="Control.Width" Value="120"/>
+        <Setter Property="Control.Height" Value="25"/>
+        <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Control.HorizontalContentAlignment" Value="Center"/>
+    </Style>
+</ResourceDictionary>
