@@ -21,6 +21,8 @@
             <RowDefinition Height="5*"></RowDefinition>
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="2" Grid.Row="0">
+            <MenuItem Header="Проекты" x:Name="MenuItemProjects" Click="MenuItemProjects_Click"></MenuItem>
+            <MenuItem Header="Сохраненные ряды" x:Name="MenuItemSavedSeries" Click="MenuItemSavedSeries_Click"/>
             <MenuItem Header="Конструктор функции" x:Name="MenuItemСonstructor" Click="MenuItemСonstructor_Click"/>
             <MenuItem Header="Примеры рядов" x:Name="MenuItemExamples"  Click="MenuItemExamples_Click"/>
             <MenuItem Header="Подсказки" x:Name="MenuItemPrompting" Click="MenuItemPrompting_Click"/>

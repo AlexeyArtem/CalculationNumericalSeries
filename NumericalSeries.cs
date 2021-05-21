@@ -11,16 +11,8 @@ using NumericalMethods;
 
 namespace CalculationNumericalSeries
 {
-    //enum TypeSeries 
-    //{
-    //    Convergent,
-    //    Divergent,
-    //    Unknown,
-    //}
-
     //TODO:
     //1. Найти и посмотреть презентацию по погрешностям (можно ли как-то рассчитать погрешность при вычислении суммы)
-    //2. Сделать возможность сохранения функции + возможность давать названия функциям при сохранении
     //3. Сделать возможность разбивать на проекты + делать переходы между проектами + копировать функции из других проектов (на подумать, под вопросом)
 
     class NumericalSeriesNotConvergent : Exception
@@ -44,7 +36,6 @@ namespace CalculationNumericalSeries
         public double ValueLimit { get; }
         public Point[] PointsPartialSums { get; }
         public Point[] DerivativePoints { get; }
-        //массив значений производной
 
         public SumNumericalSeries(double valueLimit, Point[] pointsPartialSums, Point[] derivativePoints) 
         {
@@ -66,24 +57,6 @@ namespace CalculationNumericalSeries
             funcExpression = SymbolicExpression.Parse(function);
             variable = new Dictionary<string, FloatingPoint> { { nameVariable, 0 } };
         }
-
-        //public bool IsSignsAlternating { get; }
-        //public TypeSeries TypeSeries { get; }
-
-        //private bool CheckSignAlternation(int startNumber, int countElements) 
-        //{
-        //    bool isSignsAlternating = true;
-
-        //    if (GetFunctionValue(startNumber) < 0 && GetFunctionValue(startNumber + 1) >= 0)
-        //        for (int i = startNumber + 2; i < countElements; i++)
-        //            if (GetFunctionValue(i) >= 0 || GetFunctionValue(i + 1) < 0) isSignsAlternating = false;
-
-        //    else if (GetFunctionValue(startNumber) >= 0 && GetFunctionValue(startNumber + 1) < 0)
-        //        for (int j = startNumber + 2; j < countElements; j++) 
-        //            if (GetFunctionValue(j) < 0 || GetFunctionValue(j + 1) >= 0) isSignsAlternating = false;
-
-        //    return isSignsAlternating;
-        //}
 
         private double GetFunctionValue(int numberMember)
         {
@@ -160,7 +133,6 @@ namespace CalculationNumericalSeries
         public SumNumericalSeries GetSum(int startNumber, int endNumber)
         {
             if (startNumber < 0 || endNumber < 0) throw new NegativeMemberNumberException("Номер члена ряда не может быть отрицательным числом");
-            if (startNumber == 0) startNumber = 1; //Подумать, как избавиться от этого
 
             double sum = 0;
             List<Point> pointsPartialSums = new List<Point>();
@@ -182,7 +154,6 @@ namespace CalculationNumericalSeries
         public SumNumericalSeries GetSum(int startNumber, double accuracy)
         {
             if (startNumber < 0) throw new NegativeMemberNumberException("Номер члена ряда не может быть отрицательным числом");
-            else if (startNumber == 0) startNumber = 1; //Как это изменить
             if (!CheckConvergence(1000)) throw new NumericalSeriesNotConvergent("Нельзя найти приблизительное значение предела расходящегося ряда");
 
             List<Point> pointsPartialSums = new List<Point>();

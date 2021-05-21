@@ -1,0 +1,63 @@
+﻿<local:BaseDialogWindow x:Class="CalculationNumericalSeries.ProjectsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CalculationNumericalSeries"
+        mc:Ignorable="d"
+        Title="Проекты" Height="364.579" Width="464.684">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource ResourceKey=ControlButton}">
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Margin" Value="3,0,3,0"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.9*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition Height="1.8*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0">Список проектов:</Label>
+        <ListBox x:Name="ListProjects" Grid.Row="1" Grid.Column="0" Margin="10,0,10,5" SelectionChanged="ListProjects_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Grid.Row="0" Grid.Column="1">Функции проекта:</Label>
+        <DataGrid x:Name="DgFunctions" Grid.Row="1" Grid.Column="1" Margin="10,0,10,5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Функция" Binding="{Binding Path=Key}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Название" Binding="{Binding Path=Value}" Width="2*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BtAddProject" Click="BtAddProject_Click" Grid.Column="0" Grid.Row="0" Style="{StaticResource ResourceKey=ControlButton}" Width="70" Margin="0, 0, 5, 0" HorizontalAlignment="Right">Добавить</Button>
+            <Button x:Name="BtDelProject" Click="BtDelProject_Click" Grid.Column="1" Grid.Row="0" Style="{StaticResource ResourceKey=ControlButton}" Width="70" Margin="5, 0, 0, 0" HorizontalAlignment="Left">Удалить</Button>
+            <Button x:Name="BtSelectionProject" Click="BtSelectionProject_Click" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Width="150" Style="{StaticResource ResourceKey=ControlButton}" Margin="0, 0, 0, 2">Сделать текущим</Button>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
+            <Button x:Name="BtAddFunction" Click="BtAddFunction_Click">Добавить</Button>
+            <Button x:Name="BtChangeFunction" Click="BtChangeFunction_Click">Изменить</Button>
+            <Button x:Name="BtDelFunction" Click="BtDelFunction_Click">Удалить</Button>
+        </StackPanel>
+    </Grid>
+</local:BaseDialogWindow>

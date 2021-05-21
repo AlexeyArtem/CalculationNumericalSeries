@@ -10,4 +10,9 @@
         <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
         <Setter Property="Control.HorizontalContentAlignment" Value="Center"/>
     </Style>
+    <Style TargetType="DataGrid">
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="RowHeaderWidth" Value="0"/>
+    </Style>
 </ResourceDictionary>

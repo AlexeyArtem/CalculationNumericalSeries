@@ -1,0 +1,33 @@
+﻿<Window x:Class="CalculationNumericalSeries.ChangeSeriesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CalculationNumericalSeries"
+        mc:Ignorable="d"
+        Title="Сохранение ряда" Height="250.5" Width="285.5" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Bottom"></Setter>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0">Функция:</Label>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBox Style="{StaticResource ResourceKey=DataInputElement}" Grid.Row="1" x:Name="TbFunction"></TextBox>
+            <Button Style="{StaticResource ResourceKey=DataInputElement}" Width="80" Margin="7,0,0,0" x:Name="BtConstructor" Click="BtConstructor_Click">Конструктор</Button>
+        </StackPanel>
+        <Label Grid.Row="2">Название:</Label>
+        <TextBox Style="{StaticResource ResourceKey=DataInputElement}" Grid.Row="3" x:Name="TbNameFunction"></TextBox>
+        <Button Style="{StaticResource ResourceKey=ControlButton}" Grid.Row="4" x:Name="BtChange" Click="BtChange_Click">Изменить</Button>
+    </Grid>
+</Window>

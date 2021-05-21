@@ -62,11 +62,24 @@
     <Reference Include="MathParser, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MathosParser.2.0.0\lib\net471\MathParser.dll</HintPath>
     </Reference>
+    <Reference Include="Namotion.Reflection, Version=1.0.23.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>packages\Namotion.Reflection.1.0.23\lib\net45\Namotion.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NJsonSchema, Version=10.4.3.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>packages\NJsonSchema.10.4.3\lib\net45\NJsonSchema.dll</HintPath>
+    </Reference>
+    <Reference Include="NSwag.Core, Version=13.11.1.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
+      <HintPath>packages\NSwag.Core.13.11.1\lib\net45\NSwag.Core.dll</HintPath>
+    </Reference>
     <Reference Include="NumericalMethodsLibrary">
       <HintPath>packages\NumericalMethods.1.0.4\NumericalMethodsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
@@ -102,6 +115,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddProjectWindow.xaml.cs">
+      <DependentUpon>AddProjectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BaseDialogWindow.cs" />
+    <Compile Include="ChangeSeriesWindow.xaml.cs">
+      <DependentUpon>ChangeSeriesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Project.cs" />
+    <Compile Include="Projects.cs" />
+    <Compile Include="ProjectsWindow.xaml.cs">
+      <DependentUpon>ProjectsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SavedSeriesWindow.xaml.cs">
+      <DependentUpon>SavedSeriesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SavingSeriesWindow.xaml.cs">
+      <DependentUpon>SavingSeriesWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AddProjectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangeSeriesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConstructorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,11 +167,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProjectsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PromptingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourcesDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SavedSeriesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SavingSeriesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

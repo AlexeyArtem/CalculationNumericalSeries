@@ -5,16 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using LiveCharts.Wpf;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Defaults;
+using System.Windows.Controls;
 
 namespace CalculationNumericalSeries
 {
@@ -27,12 +26,22 @@ namespace CalculationNumericalSeries
         private SeriesCollection derivativeSeries;
         private LineSeries partialSumLine;
         private LineSeries derivativeLine;
+
         private PromptingsWindow promptingsWindow;
+        private ProjectsWindow projectsWindow;
         
         public MainWindow()
         {
             InitializeComponent();
+
+            //
+            //Projects.AddFunction(Projects.CurrentProject, "1/n", "Сепенная 1");
+            //Projects.AddFunction(Projects.CurrentProject, "1/n*2", "Сепенная 2");
+            //
+
+
             promptingsWindow = new PromptingsWindow();
+            projectsWindow = new ProjectsWindow();
             CbSelectUpperLimit.SelectedIndex = 0;
 
             partialSumSeries = new SeriesCollection();
@@ -139,6 +148,21 @@ namespace CalculationNumericalSeries
                     CbItemUpperLimit.IsSelected = false;
                     UdAccuracy.IsEnabled = false;
                     break;
+            }
+        }
+
+        private void MenuItemProjects_Click(object sender, RoutedEventArgs e)
+        {
+            projectsWindow?.ShowDialog();
+        }
+
+        private void MenuItemSavedSeries_Click(object sender, RoutedEventArgs e)
+        {
+            SavedSeriesWindow savedSeriesWindow = new SavedSeriesWindow(Projects.CurrentProject);
+            if (!(bool)savedSeriesWindow.ShowDialog() && savedSeriesWindow.DgSeries.SelectedItem != null) 
+            {
+                KeyValuePair<string, string> keyValueFunc = (KeyValuePair<string, string>)savedSeriesWindow.DgSeries.SelectedItem;
+                TbInputFunc.Text = keyValueFunc.Key;
             }
         }
     }
