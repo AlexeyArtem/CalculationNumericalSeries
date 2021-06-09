@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FParsec, Version=1.0.0.0, Culture=neutral, PublicKeyToken=40ccfc0a09edbb5d, processorArchitecture=MSIL">
@@ -74,14 +82,15 @@
     <Reference Include="NSwag.Core, Version=13.11.1.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
       <HintPath>packages\NSwag.Core.13.11.1\lib\net45\NSwag.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NumericalMethodsLibrary">
-      <HintPath>packages\NumericalMethods.1.0.4\NumericalMethodsLibrary.dll</HintPath>
+    <Reference Include="NumericalSeries">
+      <HintPath>NumericalSeries\bin\Debug\NumericalSeries.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -115,37 +124,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddProjectWindow.xaml.cs">
+    <Compile Include="windows\AddProjectWindow.xaml.cs">
       <DependentUpon>AddProjectWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BaseDialogWindow.cs" />
-    <Compile Include="ChangeSeriesWindow.xaml.cs">
+    <Compile Include="windows\ChangeSeriesWindow.xaml.cs">
       <DependentUpon>ChangeSeriesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Project.cs" />
-    <Compile Include="Projects.cs" />
-    <Compile Include="ProjectsWindow.xaml.cs">
+    <Compile Include="windows\FunctionMoveWindow.xaml.cs">
+      <DependentUpon>FunctionMoveWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="classes\Project.cs" />
+    <Compile Include="classes\Projects.cs" />
+    <Compile Include="windows\ProjectsWindow.xaml.cs">
       <DependentUpon>ProjectsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SavedSeriesWindow.xaml.cs">
+    <Compile Include="windows\SavedSeriesWindow.xaml.cs">
       <DependentUpon>SavedSeriesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SavingSeriesWindow.xaml.cs">
+    <Compile Include="windows\SavingSeriesWindow.xaml.cs">
       <DependentUpon>SavingSeriesWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddProjectWindow.xaml">
+    <Page Include="windows\AddProjectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChangeSeriesWindow.xaml">
+    <Page Include="windows\ChangeSeriesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ConstructorWindow.xaml">
+    <Page Include="windows\ConstructorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ExamplesWindow.xaml">
+    <Page Include="windows\ExamplesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\FunctionMoveWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,21 +172,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ConstructorWindow.xaml.cs">
+    <Compile Include="windows\ConstructorWindow.xaml.cs">
       <DependentUpon>ConstructorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExamplesWindow.xaml.cs">
+    <Compile Include="windows\ExamplesWindow.xaml.cs">
       <DependentUpon>ExamplesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ProjectsWindow.xaml">
+    <Page Include="windows\ProjectsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PromptingsWindow.xaml">
+    <Page Include="windows\PromptingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,18 +194,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SavedSeriesWindow.xaml">
+    <Page Include="windows\SavedSeriesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SavingSeriesWindow.xaml">
+    <Page Include="windows\SavingSeriesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NumericalSeries.cs" />
-    <Compile Include="PromptingsWindow.xaml.cs">
+    <Compile Include="windows\PromptingsWindow.xaml.cs">
       <DependentUpon>PromptingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -219,9 +233,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="icons\copy.png" />
+    <Resource Include="favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

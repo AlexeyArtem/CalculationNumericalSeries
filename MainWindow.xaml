@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CalculationNumericalSeries" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="Автоматизация расчета числовых рядов" Height="450" Width="559.2" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="Автоматизация расчета числовых рядов" Height="450" Width="644.8" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Margin" Value="0,3,0,0"/>
         </Style>
         <Style TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="ButtonMainMenu">
+            <Setter Property="Control.Margin" Value="0,1,0,0"/>
+            <Setter Property="Control.Height" Value="25"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -48,11 +52,12 @@
                         </TextBox.ToolTip>
                     </TextBox>
                 </StackPanel>
+                <Button Style="{StaticResource ButtonMainMenu}" Width="75" Margin="0,1.3,10,0" x:Name="BtSaveFunc" Click="BtSaveFunc_Click">Сохранить</Button>
                 <StackPanel Margin="0, 0, 10, 23" Orientation="Vertical" VerticalAlignment="Center">
                     <Label>Погрешность:</Label>
                     <xctk:DoubleUpDown Style="{StaticResource ResourceKey=DataInputElement}" x:Name="UdAccuracy" Minimum="0.0000000001" Value="0.01"></xctk:DoubleUpDown>
                 </StackPanel>
-                <Button Margin="0,1,0,0" x:Name="BtFindSolution" Height="25" Width="25" VerticalContentAlignment="Center" Click="BtFindSolution_Click" Content="="/>
+                <Button Style="{StaticResource ButtonMainMenu}" x:Name="BtFindSolution" Width="25" VerticalContentAlignment="Center" Click="BtFindSolution_Click" Content="="/>
                 <Label VerticalContentAlignment="Center" x:Name="LbResult" Width="70"></Label>
                 <Button x:Name="BtCopy" Height="25" Width="82" Margin="0,1,0,0" Click="BtCopy_Click" MouseLeave="BtCopy_MouseLeave">Копировать</Button>
             </StackPanel>

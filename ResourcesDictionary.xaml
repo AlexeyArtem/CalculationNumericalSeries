@@ -15,4 +15,8 @@
         <Setter Property="IsReadOnly" Value="True"/>
         <Setter Property="RowHeaderWidth" Value="0"/>
     </Style>
+    <Style x:Key="FunctionControlButton" TargetType="Button" BasedOn="{StaticResource ResourceKey=ControlButton}">
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="Margin" Value="3,0,3,0"/>
+    </Style>
 </ResourceDictionary>

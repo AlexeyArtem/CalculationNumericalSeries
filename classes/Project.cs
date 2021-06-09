@@ -19,15 +19,5 @@ namespace CalculationNumericalSeries
         public string Name { get; }
         public ObservableDictionary<string, string> Functions { get; }
 
-        public void AddFunction(string function, string name) 
-        {
-            Functions.Add(function, name);
-        }
-
-        //public void RemoveFunction(int index) 
-        //{
-        //    KeyValuePair<string, string> pair = Functions.ElementAtOrDefault(index);
-        //    Functions.Remove(pair.Key);
-        //}
     }
 }

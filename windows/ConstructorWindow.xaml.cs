@@ -202,5 +202,11 @@ namespace CalculationNumericalSeries
         {
             AddFunctionElement("e");
         }
+
+        public bool? ShowDialog(string function)
+        {
+            TbInputFunction.Text = function;
+            return ShowDialog();
+        }
     }
 }

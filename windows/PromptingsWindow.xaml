@@ -8,12 +8,13 @@
         Title="Подсказки" Height="179.237" Width="305.509" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <ListBox Margin="10" HorizontalContentAlignment="Center">
-            <ListBoxItem>sin(x) – функция cинуса от x</ListBoxItem>
-            <ListBoxItem>cos(x) – функция косинуса от x</ListBoxItem>
-            <ListBoxItem>tg(x) – функция тангенса от x</ListBoxItem>
-            <ListBoxItem>absolute(x) – модуль x</ListBoxItem>
-            <ListBoxItem>log(x) – натуральный логарифм от x</ListBoxItem>
-            <ListBoxItem>sqrt(x) – функция квадратного корня от x</ListBoxItem>
+            <ListBoxItem>sin(n) – функция cинуса от n</ListBoxItem>
+            <ListBoxItem>cos(n) – функция косинуса от n</ListBoxItem>
+            <ListBoxItem>tg(n) – функция тангенса от n</ListBoxItem>
+            <ListBoxItem>absolute(n) – модуль n</ListBoxItem>
+            <ListBoxItem>ln(n) – натуральный логарифм от n</ListBoxItem>
+            <ListBoxItem>lg(n) – десятичный логарифм от n</ListBoxItem>
+            <ListBoxItem>sqrt(n) – функция квадратного корня от n</ListBoxItem>
         </ListBox>
     </Grid>
 </Window>

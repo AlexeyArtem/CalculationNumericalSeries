@@ -1,21 +1,12 @@
-﻿using System;
+﻿using MathNet.Symbolics;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using MathNet.Symbolics;
-using NumericalMethods;
 
-
-namespace CalculationNumericalSeries
+namespace NumericalSeries
 {
-    //TODO:
-    //1. Найти и посмотреть презентацию по погрешностям (можно ли как-то рассчитать погрешность при вычислении суммы)
-    //3. Сделать возможность разбивать на проекты + делать переходы между проектами + копировать функции из других проектов (на подумать, под вопросом)
-
-    class NumericalSeriesNotConvergent : Exception
+    public class NumericalSeriesNotConvergent : Exception
     {
         public NumericalSeriesNotConvergent() : base() { }
         public NumericalSeriesNotConvergent(string msg) : base(msg) { }
@@ -23,7 +14,7 @@ namespace CalculationNumericalSeries
         public NumericalSeriesNotConvergent(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 
-    class NegativeMemberNumberException : Exception 
+    public class NegativeMemberNumberException : Exception
     {
         public NegativeMemberNumberException() : base() { }
         public NegativeMemberNumberException(string msg) : base(msg) { }
@@ -31,13 +22,13 @@ namespace CalculationNumericalSeries
         public NegativeMemberNumberException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 
-    struct SumNumericalSeries 
+    public struct SumNumericalSeries
     {
         public double ValueLimit { get; }
         public Point[] PointsPartialSums { get; }
         public Point[] DerivativePoints { get; }
 
-        public SumNumericalSeries(double valueLimit, Point[] pointsPartialSums, Point[] derivativePoints) 
+        public SumNumericalSeries(double valueLimit, Point[] pointsPartialSums, Point[] derivativePoints)
         {
             ValueLimit = valueLimit;
             PointsPartialSums = pointsPartialSums;
@@ -45,13 +36,13 @@ namespace CalculationNumericalSeries
         }
     }
 
-    class NumericalSeries
+    public class NumericalSeries
     {
         private Dictionary<string, FloatingPoint> variable;
         private SymbolicExpression funcExpression;
         private string nameVariable;
 
-        public NumericalSeries(string function, string nameVariable) 
+        public NumericalSeries(string function, string nameVariable)
         {
             this.nameVariable = nameVariable;
             funcExpression = SymbolicExpression.Parse(function);
@@ -66,7 +57,7 @@ namespace CalculationNumericalSeries
             return funcExpression.Evaluate(variable).RealValue;
         }
 
-        private bool СheckNecessaryConvergenceCondition(int countElements) 
+        private bool СheckNecessaryConvergenceCondition(int countElements)
         {
             bool isConvergent = true;
             double curValue, nextValue;
@@ -74,7 +65,7 @@ namespace CalculationNumericalSeries
             {
                 curValue = GetFunctionValue(i);
                 nextValue = GetFunctionValue(i + 1);
-                if (Math.Abs(curValue) < Math.Abs(nextValue)) 
+                if (Math.Abs(curValue) < Math.Abs(nextValue))
                 {
                     isConvergent = false;
                     break;
@@ -84,7 +75,7 @@ namespace CalculationNumericalSeries
             return isConvergent;
         }
 
-        private bool CheckDalembertAttribute(int countElements) 
+        private bool CheckDalembertAttribute(int countElements)
         {
             bool isConvergent = true;
             int k = 0;
@@ -98,7 +89,7 @@ namespace CalculationNumericalSeries
             return isConvergent;
         }
 
-        private bool CheckRaabeCondition(int countElements) 
+        private bool CheckRaabeCondition(int countElements)
         {
             bool isConvergent = true;
             int k = 0;
@@ -112,7 +103,7 @@ namespace CalculationNumericalSeries
             return isConvergent;
         }
 
-        private bool CheckConvergence(int countElements) 
+        private bool CheckConvergence(int countElements)
         {
             if (countElements < 0) throw new NegativeMemberNumberException("Количество элементов не может быть отрицательным числом");
 
@@ -168,7 +159,7 @@ namespace CalculationNumericalSeries
                 nextSum = GetPartialSum(i + 1);
                 i++;
             }
-            while(Math.Abs(Math.Abs(nextSum) - Math.Abs(curSum)) > Math.Abs(accuracy));
+            while (Math.Abs(Math.Abs(nextSum) - Math.Abs(curSum)) > Math.Abs(accuracy));
             pointsPartialSums.Add(new Point(i, nextSum));
 
             Derivative derivative = new Derivative(points);
@@ -177,7 +168,7 @@ namespace CalculationNumericalSeries
             return new SumNumericalSeries(nextSum, pointsPartialSums.ToArray(), result.DerivativePoints.ToArray());
         }
 
-        public double GetPartialSum(int sumNumber) 
+        public double GetPartialSum(int sumNumber)
         {
             if (sumNumber < 0) throw new NegativeMemberNumberException("Номер частичной суммы ряда не может быть отрицательным числом");
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CalculationNumericalSeries"
         mc:Ignorable="d"
-        Title="Сохранение ряда" Height="250.5" Width="285.5" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Изменение ряда" Height="250.5" Width="285.5" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>

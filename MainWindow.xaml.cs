@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using LiveCharts.Wpf;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using LiveCharts;
 using LiveCharts.Defaults;
 using System.Windows.Controls;
+using NumericalSeries;
 
 namespace CalculationNumericalSeries
 {
@@ -34,12 +27,6 @@ namespace CalculationNumericalSeries
         {
             InitializeComponent();
 
-            //
-            //Projects.AddFunction(Projects.CurrentProject, "1/n", "Сепенная 1");
-            //Projects.AddFunction(Projects.CurrentProject, "1/n*2", "Сепенная 2");
-            //
-
-
             promptingsWindow = new PromptingsWindow();
             projectsWindow = new ProjectsWindow();
             CbSelectUpperLimit.SelectedIndex = 0;
@@ -59,7 +46,7 @@ namespace CalculationNumericalSeries
         {
             try
             {
-                NumericalSeries numericalSeries = new NumericalSeries(TbInputFunc.Text, "n");
+                NumericalSeries.NumericalSeries numericalSeries = new NumericalSeries.NumericalSeries(TbInputFunc.Text, "n");
                 SumNumericalSeries result;
                 if (UdInputUpperLimit.IsEnabled)
                 {
@@ -84,24 +71,19 @@ namespace CalculationNumericalSeries
                 LbResult.Content = "";
                 partialSumLine.Values.Clear();
                 derivativeLine.Values.Clear();
-
-                if (ex is NegativeMemberNumberException)
-                    MessageBox.Show(ex.Message + ".", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
-                else if (ex is NumericalSeriesNotConvergent)
-                    MessageBox.Show(ex.Message + ".", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
-                else
-                    MessageBox.Show(ex.Message + ".", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(ex.Message + ".", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         private void MenuItemExamples_Click(object sender, RoutedEventArgs e)
         {
             ExamplesWindow examplesWindow = new ExamplesWindow();
-            if (!(bool)examplesWindow.ShowDialog()) 
+            examplesWindow.BtSelectExample.Click += delegate (object s, RoutedEventArgs args)
             {
                 string exampleFunc = (examplesWindow.ListExamples.SelectedItem as ListBoxItem)?.Content as string;
                 TbInputFunc.Text = exampleFunc ?? TbInputFunc.Text;
-            }
+            };
+            examplesWindow.ShowDialog();
         }
 
         private void MenuItemСonstructor_Click(object sender, RoutedEventArgs e)
@@ -153,17 +135,26 @@ namespace CalculationNumericalSeries
 
         private void MenuItemProjects_Click(object sender, RoutedEventArgs e)
         {
-            projectsWindow?.ShowDialog();
+            new ProjectsWindow().ShowDialog();
         }
 
         private void MenuItemSavedSeries_Click(object sender, RoutedEventArgs e)
         {
             SavedSeriesWindow savedSeriesWindow = new SavedSeriesWindow(Projects.CurrentProject);
-            if (!(bool)savedSeriesWindow.ShowDialog() && savedSeriesWindow.DgSeries.SelectedItem != null) 
+            savedSeriesWindow.BtUseSeries.Click += delegate (object s, RoutedEventArgs args)
             {
-                KeyValuePair<string, string> keyValueFunc = (KeyValuePair<string, string>)savedSeriesWindow.DgSeries.SelectedItem;
+                KeyValuePair<string, string> keyValueFunc = savedSeriesWindow.DgSeries.SelectedItem != null ? (KeyValuePair<string, string>)savedSeriesWindow.DgSeries.SelectedItem : new KeyValuePair<string, string>("","");
                 TbInputFunc.Text = keyValueFunc.Key;
-            }
+            };
+
+            savedSeriesWindow.ShowDialog();
+        }
+
+        private void BtSaveFunc_Click(object sender, RoutedEventArgs e)
+        {
+            SavingSeriesWindow savingSeriesWindow = new SavingSeriesWindow(Projects.CurrentProject);
+            savingSeriesWindow.ShowDialog(TbInputFunc.Text);
+
         }
     }
 }

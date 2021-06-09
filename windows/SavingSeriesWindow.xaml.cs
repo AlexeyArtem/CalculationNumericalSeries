@@ -39,7 +39,21 @@ namespace CalculationNumericalSeries
 
         private void BtConstructor_Click(object sender, RoutedEventArgs e)
         {
+            ConstructorWindow constructorWindow = new ConstructorWindow();
+            constructorWindow.BtAddFunction.Click += delegate (object s, RoutedEventArgs args) 
+            {
+                string func = constructorWindow.TbInputFunction.Text;
+                TbFunction.Text = func != "" ? func : TbFunction.Text;
+            };
 
+            if (TbFunction.Text == string.Empty) constructorWindow.ShowDialog();
+            else constructorWindow.ShowDialog(TbFunction.Text);
+        }
+
+        public bool? ShowDialog(string saveFunction)
+        {
+            TbFunction.Text = saveFunction;
+            return ShowDialog();
         }
     }
 }

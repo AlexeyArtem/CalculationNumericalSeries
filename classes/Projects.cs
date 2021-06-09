@@ -19,14 +19,6 @@ namespace CalculationNumericalSeries
         private static Project currentProject;
         private static ObservableDictionary<string, string> currentFunctions;
 
-        public static event PropertyChangedEventHandler PropertyChanged = delegate { };
-        private static void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged(
-                typeof(Projects),
-                new PropertyChangedEventArgs(propertyName));
-        }
-
         static Projects() 
         {
             using (FileStream file = new FileStream(nameFile, FileMode.OpenOrCreate))
@@ -66,7 +58,7 @@ namespace CalculationNumericalSeries
                 if (listProjects.Contains(value)) 
                 {
                     currentProject = value;
-                    CurrentFunctions = currentProject.Functions;
+                    currentFunctions = currentProject.Functions;
                 }
             }
         }
@@ -77,11 +69,9 @@ namespace CalculationNumericalSeries
             {
                 return currentFunctions;
             }
-            set 
+            private set 
             {
                 currentFunctions = value;
-                OnPropertyChanged("CurrentFunctions");
-
             }
         }
 
@@ -103,21 +93,10 @@ namespace CalculationNumericalSeries
         {
             if (listProjects.Contains(project) && listProjects.Count < 2) throw new Exception("Нельзя удалить последний проект");
 
-            if (listProjects.Remove(project)) 
-            {
-                if (listProjects[listProjects.IndexOf(project)] == CurrentProject) 
-                {
-                    CurrentProject = listProjects[0];
-                    //Вызов OnPropertyChange
-                }
-                Save();
-            }
-            
-        }
-
-        public static void ChangeProject() 
-        {
-
+            listProjects.Remove(project);
+            if (CurrentProject == project)
+                CurrentProject = listProjects[0];
+            Save();
         }
 
         public static void AddFunction(Project project, string function, string name) 
@@ -154,6 +133,5 @@ namespace CalculationNumericalSeries
                 }
             }
         }
-
     }
 }
