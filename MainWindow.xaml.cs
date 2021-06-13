@@ -152,8 +152,8 @@ namespace CalculationNumericalSeries
 
         private void BtSaveFunc_Click(object sender, RoutedEventArgs e)
         {
-            SavingSeriesWindow savingSeriesWindow = new SavingSeriesWindow(Projects.CurrentProject);
-            savingSeriesWindow.ShowDialog(TbInputFunc.Text);
+            SavingSeriesWindow savingSeriesWindow = new SavingSeriesWindow(Projects.CurrentProject, TbInputFunc.Text);
+            savingSeriesWindow.ShowDialog();
 
         }
     }

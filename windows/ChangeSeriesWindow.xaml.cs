@@ -20,18 +20,15 @@ namespace CalculationNumericalSeries
     public partial class ChangeSeriesWindow : Window
     {
         private string oldFunction;
+        private Project project;
 
-        public ChangeSeriesWindow()
+        public ChangeSeriesWindow(string oldFunction, string oldName, Project project)
         {
             InitializeComponent();
-        }
-
-        public bool? ShowEditDialog(string function, string nameFunction) 
-        {
-            oldFunction = function;
-            TbFunction.Text = function;
-            TbNameFunction.Text = nameFunction;
-            return ShowDialog();
+            this.oldFunction = oldFunction;
+            this.project = project;
+            TbFunction.Text = oldFunction;
+            TbNameFunction.Text = oldName;
         }
 
         private void BtChange_Click(object sender, RoutedEventArgs e)
@@ -41,13 +38,20 @@ namespace CalculationNumericalSeries
                 MessageBox.Show("Чтобы сохранить функцию, необходимо ввести функцию и название", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            Projects.ChangeFunction(oldFunction, TbFunction.Text, TbNameFunction.Text);
+            project.ChangeFunction(oldFunction, TbFunction.Text, TbNameFunction.Text);
             Close();
         }
 
         private void BtConstructor_Click(object sender, RoutedEventArgs e)
         {
+            ConstructorWindow constructorWindow = new ConstructorWindow();
+            constructorWindow.BtAddFunction.Click += delegate (object s, RoutedEventArgs args)
+            {
+                string func = constructorWindow.TbInputFunction.Text;
+                TbFunction.Text = func != "" ? func : TbFunction.Text;
+            };
 
+            constructorWindow.ShowDialog(TbFunction.Text);
         }
     }
 }

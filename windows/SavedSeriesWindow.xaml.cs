@@ -18,7 +18,6 @@ namespace CalculationNumericalSeries
     public partial class SavedSeriesWindow : Window
     {
         private Project currentProject;
-
         public SavedSeriesWindow(Project currentProject)
         {
             InitializeComponent();
@@ -49,9 +48,9 @@ namespace CalculationNumericalSeries
                 MessageBox.Show("Для изменения ряда, выберите его из списка", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            ChangeSeriesWindow changeSeriesWindow = new ChangeSeriesWindow();
             KeyValuePair<string, string> keyValueFunc = (KeyValuePair<string, string>)DgSeries.SelectedItem;
-            changeSeriesWindow.ShowEditDialog(keyValueFunc.Key, keyValueFunc.Value);
+            ChangeSeriesWindow changeSeriesWindow = new ChangeSeriesWindow(keyValueFunc.Key, keyValueFunc.Value, currentProject);
+            changeSeriesWindow.ShowDialog();
         }
 
         private void BtDelSeries_Click(object sender, RoutedEventArgs e)
@@ -62,7 +61,7 @@ namespace CalculationNumericalSeries
                 return;
             }
             KeyValuePair<string, string> keyValueFunc = (KeyValuePair<string, string>)DgSeries.SelectedItem;
-            Projects.RemoveFunction(keyValueFunc.Key);
+            currentProject.RemoveFunction(keyValueFunc.Key);
         }
     }
 }

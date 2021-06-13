@@ -49,11 +49,11 @@ namespace NumericalSeries
             variable = new Dictionary<string, FloatingPoint> { { nameVariable, 0 } };
         }
 
-        private double GetFunctionValue(int numberMember)
+        private double GetFunctionValue(int value)
         {
-            if (numberMember < 0) throw new NegativeMemberNumberException("Номер члена ряда не может быть отрицательным числом");
+            if (value < 0) throw new NegativeMemberNumberException("Номер члена ряда не может быть отрицательным числом");
 
-            variable[nameVariable] = numberMember;
+            variable[nameVariable] = value;
             return funcExpression.Evaluate(variable).RealValue;
         }
 
@@ -103,7 +103,7 @@ namespace NumericalSeries
             return isConvergent;
         }
 
-        private bool CheckConvergence(int countElements)
+        public bool CheckConvergence(int countElements)
         {
             if (countElements < 0) throw new NegativeMemberNumberException("Количество элементов не может быть отрицательным числом");
 

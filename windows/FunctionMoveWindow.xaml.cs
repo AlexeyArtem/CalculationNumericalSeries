@@ -8,10 +8,15 @@ namespace CalculationNumericalSeries
     /// </summary>
     public partial class FunctionMoveWindow : Window
     {
-        public FunctionMoveWindow()
+        private Project projectSource;
+
+        public FunctionMoveWindow(Project projectSource, string function, string name)
         {
             InitializeComponent();
             ListProjects.ItemsSource = Projects.ListProjects;
+            this.projectSource = projectSource;
+            LbFunction.Content = function;
+            LbNameFunction.Content = name;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -22,23 +27,17 @@ namespace CalculationNumericalSeries
 
             try
             {
-                if (!(!(ListProjects.SelectedItem is Project project)))
+                Project recipientProject = ListProjects.SelectedItem as Project;
+                if (recipientProject != null)
                 {
-                    Projects.AddFunction(project, function, name);
-                    Projects.RemoveFunction(function);
+                    recipientProject.Functions.Add(function, name);
+                    projectSource.Functions.Remove(function);
                     Close();
                 }
                 else MessageBox.Show("Чтобы переместить функцию, выберите проект", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (ArgumentException) { MessageBox.Show("Функция уже существует в проекте", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
-        }
-
-        public bool? ShowDialog(string function, string name) 
-        {
-            LbFunction.Content = function;
-            LbNameFunction.Content = name;
-            return ShowDialog();
         }
     }
 }

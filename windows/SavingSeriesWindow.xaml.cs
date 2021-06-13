@@ -20,9 +20,10 @@ namespace CalculationNumericalSeries
     public partial class SavingSeriesWindow : Window
     {
         private Project currentProject;
-        public SavingSeriesWindow(Project currentProject)
+        public SavingSeriesWindow(Project currentProject, string saveFunction = "")
         {
             InitializeComponent();
+            TbFunction.Text = saveFunction;
             this.currentProject = currentProject;
         }
 
@@ -33,7 +34,7 @@ namespace CalculationNumericalSeries
                 MessageBox.Show("Чтобы сохранить функцию, необходимо ввести функцию и название", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            Projects.AddFunction(currentProject, TbFunction.Text, TbNameFunction.Text);
+            currentProject.AddFunction(TbFunction.Text, TbNameFunction.Text);
             Close();
         }
 
@@ -46,14 +47,7 @@ namespace CalculationNumericalSeries
                 TbFunction.Text = func != "" ? func : TbFunction.Text;
             };
 
-            if (TbFunction.Text == string.Empty) constructorWindow.ShowDialog();
-            else constructorWindow.ShowDialog(TbFunction.Text);
-        }
-
-        public bool? ShowDialog(string saveFunction)
-        {
-            TbFunction.Text = saveFunction;
-            return ShowDialog();
+            constructorWindow.ShowDialog(TbFunction.Text);
         }
     }
 }

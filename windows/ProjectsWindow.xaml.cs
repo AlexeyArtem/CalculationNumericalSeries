@@ -41,7 +41,7 @@ namespace CalculationNumericalSeries
             try
             {
                 Project project = ListProjects.SelectedItem as Project;
-                if (!(project is null)) Projects.RemoveProject(project);
+                if (!(project is null)) Projects.Remove(project);
             }
             catch (Exception ex)
             {
@@ -77,7 +77,7 @@ namespace CalculationNumericalSeries
                 return;
             }
             KeyValuePair<string, string> keyValueFunc = (KeyValuePair<string, string>)DgFunctions.SelectedItem;
-            Projects.RemoveFunction(keyValueFunc.Key);
+            (ListProjects.SelectedItem as Project)?.RemoveFunction(keyValueFunc.Key);
         }
 
         private void BtChangeFunction_Click(object sender, RoutedEventArgs e)
@@ -88,8 +88,8 @@ namespace CalculationNumericalSeries
                 return;
             }
             KeyValuePair<string, string> keyValueFunc = (KeyValuePair<string, string>)DgFunctions.SelectedItem;
-            ChangeSeriesWindow changeSeriesWindow = new ChangeSeriesWindow();
-            changeSeriesWindow.ShowEditDialog(keyValueFunc.Key, keyValueFunc.Value);
+            ChangeSeriesWindow changeSeriesWindow = new ChangeSeriesWindow(keyValueFunc.Key, keyValueFunc.Value, ListProjects.SelectedItem as Project);
+            changeSeriesWindow.ShowDialog();
         }
 
         private void ListProjects_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -109,10 +109,12 @@ namespace CalculationNumericalSeries
                 MessageBox.Show("Чтобы переместить функцию, выберите её из таблицы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-
-            KeyValuePair<string, string> keyValue = (KeyValuePair<string, string>)DgFunctions.SelectedItem;
-            FunctionMoveWindow functionMoveWindow = new FunctionMoveWindow();
-            functionMoveWindow.ShowDialog(keyValue.Key, keyValue.Value);
+            if (ListProjects.SelectedItem is Project project)
+            {
+                KeyValuePair<string, string> keyValue = (KeyValuePair<string, string>)DgFunctions.SelectedItem;
+                FunctionMoveWindow functionMoveWindow = new FunctionMoveWindow(project, keyValue.Key, keyValue.Value);
+                functionMoveWindow.ShowDialog();
+            }
         }
 
         private void ChangeLabelNameCurrentProject() 

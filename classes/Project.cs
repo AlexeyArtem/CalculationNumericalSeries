@@ -19,5 +19,32 @@ namespace CalculationNumericalSeries
         public string Name { get; }
         public ObservableDictionary<string, string> Functions { get; }
 
+        public event EventHandler ChangingFunctions;
+
+        private void OnChangingFunctions() 
+        {
+            ChangingFunctions?.Invoke(this, new EventArgs());
+        }
+
+        public void AddFunction(string function, string name) 
+        {
+            Functions.Add(function, name);
+            OnChangingFunctions();
+        }
+
+        public void ChangeFunction(string oldFunction, string newFunction, string newName) 
+        {
+            if (Functions.Remove(oldFunction)) 
+            {
+                Functions.Add(newFunction, newName);
+                OnChangingFunctions();
+            }
+        }
+
+        public void RemoveFunction(string function) 
+        {
+            if (Functions.Remove(function))
+                OnChangingFunctions();
+        }
     }
 }

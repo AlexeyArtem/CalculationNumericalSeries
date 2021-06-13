@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationNumericalSeries"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumericalSeries", "NumericalSeries\NumericalSeries.csproj", "{3111EF77-9CE7-4E57-AB4D-E07B0DC777FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{7DBD7231-B841-4277-BF7E-BC5315183C3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3111EF77-9CE7-4E57-AB4D-E07B0DC777FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3111EF77-9CE7-4E57-AB4D-E07B0DC777FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3111EF77-9CE7-4E57-AB4D-E07B0DC777FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DBD7231-B841-4277-BF7E-BC5315183C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DBD7231-B841-4277-BF7E-BC5315183C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DBD7231-B841-4277-BF7E-BC5315183C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DBD7231-B841-4277-BF7E-BC5315183C3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

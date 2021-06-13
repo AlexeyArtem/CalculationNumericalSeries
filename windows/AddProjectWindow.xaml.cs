@@ -32,7 +32,7 @@ namespace CalculationNumericalSeries
                 return;
             }
 
-            Projects.AddProject(TbNameProject.Text);
+            Projects.Add(TbNameProject.Text);
             Close();
         }
     }
