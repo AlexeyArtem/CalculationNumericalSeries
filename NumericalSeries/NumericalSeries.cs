@@ -49,11 +49,11 @@ namespace NumericalSeries
             variable = new Dictionary<string, FloatingPoint> { { nameVariable, 0 } };
         }
 
-        private double GetFunctionValue(int value)
+        private double GetFunctionValue(double valueVariable)
         {
-            if (value < 0) throw new NegativeMemberNumberException("Номер члена ряда не может быть отрицательным числом");
+            if (valueVariable < 0) throw new NegativeMemberNumberException("Номер члена ряда не может быть отрицательным числом");
 
-            variable[nameVariable] = value;
+            variable[nameVariable] = valueVariable;
             return funcExpression.Evaluate(variable).RealValue;
         }
 
@@ -75,7 +75,7 @@ namespace NumericalSeries
             return isConvergent;
         }
 
-        private bool CheckDalembertAttribute(int countElements)
+        private bool CheckDalembertCondition(int countElements)
         {
             bool isConvergent = true;
             int k = 0;
@@ -110,7 +110,7 @@ namespace NumericalSeries
             bool isConvergent;
             if (СheckNecessaryConvergenceCondition(countElements))
             {
-                if (CheckDalembertAttribute(countElements))
+                if (CheckDalembertCondition(countElements))
                     if (CheckRaabeCondition(countElements)) isConvergent = true;
                     else isConvergent = false;
 

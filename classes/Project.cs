@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
 using NSwag.Collections;
 
 namespace CalculationNumericalSeries
@@ -34,6 +29,8 @@ namespace CalculationNumericalSeries
 
         public void ChangeFunction(string oldFunction, string newFunction, string newName) 
         {
+            if (Functions.Contains(newFunction)) throw new ArgumentException("Функция уже существует в проекте");
+            
             if (Functions.Remove(oldFunction)) 
             {
                 Functions.Add(newFunction, newName);

@@ -19,16 +19,11 @@ namespace CalculationNumericalSeries
         private SeriesCollection derivativeSeries;
         private LineSeries partialSumLine;
         private LineSeries derivativeLine;
-
-        private PromptingsWindow promptingsWindow;
-        private ProjectsWindow projectsWindow;
+        private NumericalSeries.NumericalSeries numericalSeries;
         
         public MainWindow()
         {
             InitializeComponent();
-
-            promptingsWindow = new PromptingsWindow();
-            projectsWindow = new ProjectsWindow();
             CbSelectUpperLimit.SelectedIndex = 0;
 
             partialSumSeries = new SeriesCollection();
@@ -46,16 +41,14 @@ namespace CalculationNumericalSeries
         {
             try
             {
-                NumericalSeries.NumericalSeries numericalSeries = new NumericalSeries.NumericalSeries(TbInputFunc.Text, "n");
+                numericalSeries = new NumericalSeries.NumericalSeries(TbInputFunc.Text, "n");
                 SumNumericalSeries result;
+                
                 if (UdInputUpperLimit.IsEnabled)
-                {
                     result = numericalSeries.GetSum((int)UdInputLowerLimit.Value, (int)UdInputUpperLimit.Value);
-                }
                 else
-                {
                     result = numericalSeries.GetSum((int)UdInputLowerLimit.Value, (double)UdAccuracy.Value);
-                }
+                
                 LbResult.Content = result.ValueLimit.ToString();
 
                 partialSumLine.Values.Clear();
@@ -100,7 +93,7 @@ namespace CalculationNumericalSeries
 
         private void MenuItemPrompting_Click(object sender, RoutedEventArgs e)
         {
-            promptingsWindow?.Show();
+            new PromptingsWindow().ShowDialog();
         }
 
         private void BtCopy_Click(object sender, RoutedEventArgs e)

@@ -12,7 +12,7 @@ namespace CalculationNumericalSeries
     /// </summary>
     public partial class ProjectsWindow : Window
     {
-        private Label LbNameCurrentProject;
+        private Label lbNameCurrentProject;
         
         public ProjectsWindow() : base()
         {
@@ -119,8 +119,8 @@ namespace CalculationNumericalSeries
 
         private void ChangeLabelNameCurrentProject() 
         {
-            if (LbNameCurrentProject != null)
-                LbNameCurrentProject.FontWeight = FontWeights.Normal;
+            if (lbNameCurrentProject != null)
+                lbNameCurrentProject.FontWeight = FontWeights.Normal;
             
             List<Label> labelsNameProject = new List<Label>();
             FindVisualChild<Label>(ListProjects, ref labelsNameProject);
@@ -129,8 +129,8 @@ namespace CalculationNumericalSeries
                 string name = l.Content.ToString();
                 if (name == Projects.CurrentProject.Name)
                 {
-                    LbNameCurrentProject = l;
-                    LbNameCurrentProject.FontWeight = FontWeights.Bold;
+                    lbNameCurrentProject = l;
+                    lbNameCurrentProject.FontWeight = FontWeights.Bold;
                 }
             }
         }

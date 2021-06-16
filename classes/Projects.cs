@@ -4,7 +4,6 @@ using System.Text;
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
-using NSwag.Collections;
 
 namespace CalculationNumericalSeries
 {
@@ -71,13 +70,13 @@ namespace CalculationNumericalSeries
             File.WriteAllText(nameFile, json, Encoding.Default);
         }
 
-        public static void Add(string name) 
+        public static void Add(string name)
         {
             listProjects.Add(new Project(name));
             Save();
         }
 
-        public static void Remove(Project project) 
+        public static void Remove(Project project)
         {
             if (listProjects.Contains(project) && listProjects.Count < 2) throw new Exception("Нельзя удалить последний проект");
 

@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CalculationNumericalSeries
 {
@@ -34,8 +23,13 @@ namespace CalculationNumericalSeries
                 MessageBox.Show("Чтобы сохранить функцию, необходимо ввести функцию и название", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            currentProject.AddFunction(TbFunction.Text, TbNameFunction.Text);
-            Close();
+            try 
+            {
+                currentProject.AddFunction(TbFunction.Text, TbNameFunction.Text);
+                Close();
+            }
+            catch (ArgumentException) { MessageBox.Show("Функция уже существует в проекте", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void BtConstructor_Click(object sender, RoutedEventArgs e)
